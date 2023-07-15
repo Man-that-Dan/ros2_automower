@@ -217,61 +217,7 @@
       </link>
       <pose>3.9177 -2.91066 0 0 -0 0</pose>
     </model>
-    <model name='grasspatch'>
-      <static>1</static>
-      <link name='link'>
-        <collision name='collision'>
-          <pose>0 0 0 0 -0 0</pose>
-          <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>15 15</size>
-            </plane>
-          </geometry>
-          <surface>
-            <friction>
-              <ode>
-                <mu>0.5</mu>
-                <mu2>0.5</mu2>
-              </ode>
-              <torsional>
-                <ode/>
-              </torsional>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-          </surface>
-          <max_contacts>10</max_contacts>
-        </collision>
-        <visual name='visual_s10'>
-          <pose>0 0 0 0 -0 0</pose>
-          <cast_shadows>0</cast_shadows>
-          <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>15 15</size>
-            </plane>
-          </geometry>
-          <material>
-            <diffuse>1 1 1 1</diffuse>
-            <specular>1 1 1 1</specular>
-            <pbr>
-              <metal>
-                <albedo_map>materials/textures/grass_dry.png</albedo_map>
-                <normal_map>materials/textures/grass_dry.png</normal_map>
-              </metal>
-            </pbr>
-          </material>
-        </visual>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-      <pose>1.2999 -1.1623 0 0 -0 0</pose>
-    </model>
-    <model name='House 3'>
+    <model name='House_3'>
       <static>1</static>
       <link name='link'>
         <collision name='collision'>
@@ -1029,21 +975,21 @@
       <pose>-2.28041 5.29192 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>1466 54000000</sim_time>
-      <real_time>1508 854969304</real_time>
-      <wall_time>1689193946 440404030</wall_time>
-      <iterations>1466054</iterations>
+      <sim_time>1865 953000000</sim_time>
+      <real_time>420 953052934</real_time>
+      <wall_time>1689463632 734576954</wall_time>
+      <iterations>399899</iterations>
       <model name='Ecoforms_Plant_Pot_GP9AAvocado'>
-        <pose>2.45806 3.01089 -0.000376 0.002729 0.01514 -0.000171</pose>
+        <pose>2.45806 3.01089 -0.000376 0.002738 0.015131 -0.000171</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
-          <pose>2.45806 3.01089 -0.000376 0.002729 0.01514 -0.000171</pose>
+          <pose>2.45806 3.01089 -0.000376 0.002738 0.015131 -0.000171</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 -9.8 0 -0 0</acceleration>
           <wrench>0 0 -9.8 0 -0 0</wrench>
         </link>
       </model>
-      <model name='House 3'>
+      <model name='House_3'>
         <pose>4.77204 -9.24996 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
@@ -1223,21 +1169,11 @@
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name='grasspatch'>
-        <pose>1.2999 -1.1623 0 0 -0 0</pose>
+      <model name='grass_plane'>
+        <pose>0.307909 4.89203 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>1.2999 -1.1623 0 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='grasspatch_0'>
-        <pose>-9.79126 -5.40149 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose>-9.79126 -5.40149 0 0 -0 0</pose>
+          <pose>0.307909 4.89203 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -1251,16 +1187,6 @@
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='kinect'>
-        <pose>-2.35913 5.08841 0.076002 -5e-06 -4.2e-05 1.3e-05</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose>-2.35913 5.08841 0.076002 -5e-06 -4.2e-05 1.3e-05</pose>
-          <velocity>4.9e-05 1.7e-05 1.4e-05 -0.00046 0.001367 -0</velocity>
-          <acceleration>0.001285 -0.004858 -0.019925 0.134947 0.035693 0</acceleration>
-          <wrench>0.000129 -0.000486 -0.001993 0 -0 0</wrench>
         </link>
       </model>
       <model name='oak_tree'>
@@ -1378,77 +1304,21 @@
       </link>
       <pose>6.17281 -0.871312 0 0 -0 0</pose>
     </model>
-    <model name='kinect'>
-      <pose>-2.35913 5.0884 0.036 0 -0 0</pose>
-      <link name='link'>
-        <inertial>
-          <mass>0.1</mass>
-          <pose>0 0 0 0 -0 0</pose>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <collision name='collision'>
-          <geometry>
-            <box>
-              <size>0.073 0.276 0.072</size>
-            </box>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>model://kinect/meshes/kinect.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <sensor name='camera' type='depth'>
-          <update_rate>20</update_rate>
-          <camera>
-            <horizontal_fov>1.0472</horizontal_fov>
-            <image>
-              <width>640</width>
-              <height>480</height>
-              <format>R8G8B8</format>
-            </image>
-            <clip>
-              <near>0.05</near>
-              <far>3</far>
-            </clip>
-          </camera>
-        </sensor>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-    </model>
-    <model name='grasspatch_0'>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>8.06856 40.1628 21.1363 0 0.631643 -1.65899</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+    <model name='grass_plane'>
       <static>1</static>
       <link name='link'>
         <collision name='collision'>
-          <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>15 15</size>
+              <size>500 500</size>
             </plane>
           </geometry>
           <surface>
@@ -1468,38 +1338,1524 @@
           </surface>
           <max_contacts>10</max_contacts>
         </collision>
-        <visual name='visual_s10'>
+        <visual name='visual_0'>
+          <pose>-40 -40 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_1'>
+          <pose>-20 -40 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_2'>
+          <pose>0 -40 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_3'>
+          <pose>20 -40 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_4'>
+          <pose>40 -40 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_5'>
+          <pose>60 -40 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_6'>
+          <pose>-40 -20 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_7'>
+          <pose>-20 -20 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_8'>
+          <pose>0 -20 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_9'>
+          <pose>20 -20 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_10'>
+          <pose>40 -20 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_11'>
+          <pose>60 -20 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_12'>
+          <pose>80 -20 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_13'>
+          <pose>-40 0 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_14'>
+          <pose>-20 0 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_15'>
           <pose>0 0 0 0 -0 0</pose>
           <cast_shadows>0</cast_shadows>
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>15 15</size>
+              <size>20 20</size>
             </plane>
           </geometry>
           <material>
-            <diffuse>1 1 1 1</diffuse>
-            <specular>1 1 1 1</specular>
-            <pbr>
-              <metal>
-                <albedo_map>materials/textures/grass_dry.png</albedo_map>
-                <normal_map>materials/textures/grass_dry.png</normal_map>
-              </metal>
-            </pbr>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_16'>
+          <pose>20 0 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_17'>
+          <pose>40 0 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_18'>
+          <pose>60 0 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_19'>
+          <pose>80 0 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_20'>
+          <pose>100 0 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_21'>
+          <pose>120 0 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_22'>
+          <pose>-40 20 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_23'>
+          <pose>-20 20 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_24'>
+          <pose>0 20 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_25'>
+          <pose>20 20 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_26'>
+          <pose>40 20 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_27'>
+          <pose>60 20 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_28'>
+          <pose>80 20 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_29'>
+          <pose>100 20 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_30'>
+          <pose>120 20 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_31'>
+          <pose>140 20 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_32'>
+          <pose>40 40 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_33'>
+          <pose>60 40 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_34'>
+          <pose>80 40 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_35'>
+          <pose>100 40 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_36'>
+          <pose>120 40 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_37'>
+          <pose>140 40 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_38'>
+          <pose>160 40 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_39'>
+          <pose>40 60 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_40'>
+          <pose>60 60 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_41'>
+          <pose>80 60 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_42'>
+          <pose>100 60 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_43'>
+          <pose>120 60 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_44'>
+          <pose>140 60 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_45'>
+          <pose>160 60 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_46'>
+          <pose>40 80 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_47'>
+          <pose>60 80 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_48'>
+          <pose>80 80 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_49'>
+          <pose>100 80 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_50'>
+          <pose>120 80 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_51'>
+          <pose>140 80 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_52'>
+          <pose>160 80 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_53'>
+          <pose>180 80 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_54'>
+          <pose>200 80 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_55'>
+          <pose>40 100 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_56'>
+          <pose>60 100 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_57'>
+          <pose>80 100 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_58'>
+          <pose>100 100 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_59'>
+          <pose>120 100 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_60'>
+          <pose>140 100 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_61'>
+          <pose>160 100 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_62'>
+          <pose>180 100 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_63'>
+          <pose>200 100 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_63a'>
+          <pose>220 100 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_64'>
+          <pose>40 120 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_65'>
+          <pose>60 120 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_66'>
+          <pose>80 120 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_67'>
+          <pose>100 120 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_68'>
+          <pose>120 120 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_69'>
+          <pose>140 120 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_70'>
+          <pose>160 120 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_71'>
+          <pose>180 120 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_72'>
+          <pose>200 120 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_72a'>
+          <pose>220 120 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_73'>
+          <pose>40 140 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_74'>
+          <pose>60 140 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_75'>
+          <pose>80 140 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_76'>
+          <pose>100 140 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_77'>
+          <pose>120 140 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_78'>
+          <pose>140 140 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_79'>
+          <pose>160 140 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_80'>
+          <pose>180 140 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_81'>
+          <pose>200 140 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_82'>
+          <pose>40 160 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_83'>
+          <pose>60 160 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_84'>
+          <pose>80 160 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_85'>
+          <pose>100 160 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='visual_86'>
+          <pose>120 160 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/scripts</uri>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/grass plane/1/files/materials/textures</uri>
+              <name>vrc/grass</name>
+            </script>
           </material>
         </visual>
         <self_collide>0</self_collide>
         <enable_wind>0</enable_wind>
         <kinematic>0</kinematic>
       </link>
-      <pose>-9.79126 -5.40149 0 0 -0 0</pose>
+      <pose>0.307909 4.89203 0 0 -0 0</pose>
     </model>
-    <gui fullscreen='0'>
-      <camera name='user_camera'>
-        <pose>-3.19669 28.0545 34.9441 0 0.767643 -1.66299</pose>
-        <view_controller>orbit</view_controller>
-        <projection_type>perspective</projection_type>
-      </camera>
-    </gui>
   </world>
 </sdf>

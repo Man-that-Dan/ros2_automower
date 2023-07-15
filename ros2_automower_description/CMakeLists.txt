@@ -24,7 +24,7 @@ if(BUILD_TESTING)
 endif()
 
 install(
-  DIRECTORY meshes launch description
+  DIRECTORY meshes launch description worlds
   DESTINATION share/${PROJECT_NAME}
 )
 
