@@ -1,26 +1,97 @@
-from simple_pid import PID
-import serial
 import struct
+import serial
 import time
 import rclpy
-#TODO convert to params
-ZERO_VELOCITY = 1488
-LOWER_LIMIT = 876
-UPPER_LIMIT = 2100
+from simple_pid import PID
+from geometry_msgs.msg import Twist
+
 
 class MotorController(rclpy.Node):
+    """MotorController class handles translating values from /cmd_vel to signals
+    for motor control board and sending to board
+
+    Parameters:
+        kp (double): proportional gain,                          default 1.0
+        ki (double): integral gain,                              default 0.1
+        kd (double): derivative gain,                            default 0.05
+        lower_vel_limit (double):                                default -2
+        upper_vel_limit (double):                                default 2
+        zero_velocity_pwm (int):  duty cycle for zero velocity   default 1488
+        lower_limit_pwm (int):  duty cycle for lower limit       default 876
+        upper_limit_pwm (int):  duty cycle for upper limit       default 2100
+
+    """
     def __init__(self):
+        super().__init__('motor_controller_node')
         # Initialize Node, Serial, etc...
-
+        self.velocity_setpoint = 0 #initial velocity
+        self.declare_parameter('kp', 1.0) #kp gain
+        self.declare_parameter('ki', 0.1) #ki gain
+        self.declare_parameter('kd', 0.05) #kd gain
+        self.declare_parameter('lower_vel_limit', -2) # lower speed limit in m/s
+        self.declare_parameter('upper_vel_limit', 2)  # upper speed limit in m/s
+        self.declare_parameter('zero_velocity_pwm', 1488)  # duty cycle for zero velocity
+        self.declare_parameter('lower_limit_pwm', 876)  # duty cycle for zero velocity
+        self.declare_parameter('upper_limit_pwm', 2100)  # duty cycle for zero velocity
         # Initialize PID controllers for each motor
-        self.pid_motor1 = PID(1, 0.1, 0.05, setpoint=0)  # Example gains, tune accordingly
-        self.pid_motor2 = PID(1, 0.1, 0.05, setpoint=0)  # Example gains, tune accordingly
-        self.pid_motor1.output_limits = (-100, 100)  # Limits for motor speed
-        self.pid_motor2.output_limits = (-100, 100)  # Limits for motor speed
+        self.pid_motor1 = PID(self.get_parameter('kp').get_parameter_value(),
+                              self.get_parameter('ki').get_parameter_value(),
+                              self.get_parameter('kd').get_parameter_value(), setpoint=self.velocity_setpoint)
 
-    def convert_to_motor_values(command):
-        command1 = command
+        self.pid_motor2 = PID(self.get_parameter('kp').get_parameter_value(),
+                              self.get_parameter('ki').get_parameter_value(),
+                              self.get_parameter('kd').get_parameter_value(), setpoint=self.velocity_setpoint)
+        # Limits for motor speed in m/s
+        self.pid_motor1.output_limits=(self.get_parameter('lower_vel_limit').get_parameter_value(),
+                                    self.get_parameter('upper_vel_limit').get_parameter_value())
+        self.pid_motor2.output_limits=(self.get_parameter('lower_vel_limit').get_parameter_value(),
+                                    self.get_parameter('upper_vel_limit').get_parameter_value())
+        
+        self.cmd_vel_sub = self.create_subscription(
+            Twist, 'cmd_vel', self.set_velocity)
+        
+    def set_velocity(self, twist_msg : Twist):
+        """ Set velocity setpoint from twist message 
+
+        Args:
+            twist_msg (Twist): twist command with velocity
+        """
+        self.velocity_setpoint = twist_msg.linear.y
+    
+
+    def convert_to_motor_values(self, command):
+        """Convert percentage based commands commands from -100 to 100 into
+        duty cycle values used by motor control board
+
+        Args:
+            command (tuple): tuple of motor commands
+        """
+        command1 = command[0]
+        command2 = command[1]
+        zero_vel_pwm = self.get_parameter('zero_velocity_pwm').get_parameter_value()
+        lower_vel_pwm = self.get_parameter('lower_limit_pwm').get_parameter_value()
+        upper_vel_pwm = self.get_parameter('upper_limit_pwm').get_parameter_value()
+        lower_limit = self.get_parameter('lower_vel_limit').get_parameter_value()
+        upper_limit = self.get_parameter('upper_vel_limit').get_parameter_value()
+        if command1 < 0:
+            diff = int(((command1 / lower_limit) * (zero_vel_pwm - lower_vel_pwm)))
+            command1 = zero_vel_pwm - diff
+        else:
+            diff = int(((command1 / upper_limit) * (upper_vel_pwm - zero_vel_pwm)))
+            command1 = zero_vel_pwm + diff
+
+        if command2 < 0:
+            diff = int(((command2 / lower_limit) * (zero_vel_pwm - lower_vel_pwm)))
+            command2 = zero_vel_pwm - diff
+        else:
+            diff = int(((command2 / upper_limit) * (upper_vel_pwm - zero_vel_pwm)))
+            command2 = zero_vel_pwm + diff
+
+        return command1, command2
+
     def run_pid_loop(self):
+        """ run pid loop to achieve set point
+        """
         while rclpy.ok():
             type = self.ser.read(1)
             try:

@@ -3,12 +3,19 @@
 <package format="3">
   <name>ros2_automower_control</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="dantoro1995@gmail.com">paperspace</maintainer>
-  <license>TODO: License declaration</license>
+  <description>Control Package for ROS 2 Auto Lawnmower</description>
+  <maintainer email="dantoro1995@gmail.com">Daniel Toro</maintainer>
+  <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
+  <depend>hardware_interface</depend>
+  <depend>pluginlib</depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_lifecycle</depend>
+  <depend>rclpy</depend>
+  <depend>ros2_control</depend>
+  <depend>libserial-dev</dev>
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 
