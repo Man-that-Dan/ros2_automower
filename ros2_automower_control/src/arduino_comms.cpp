@@ -1,4 +1,6 @@
 #include "ros2_automower_control/arduino_comms.hpp"
+
+#include "ros2_automower_control/command_types.h"
 // #include <ros/console.h>
 #include <cstdlib>
 #include <rclcpp/rclcpp.hpp>
@@ -34,55 +36,137 @@ void ArduinoComms::setup(const std::string & serial_device, int32_t baud_rate, i
 
 void ArduinoComms::sendEmptyMsg() { std::string response = sendMsg({0x00}); }
 
-void ArduinoComms::readEncoderValues(int & val_1, int & val_2)
+std::pair<bool, std::string> ArduinoComms::readEncoderValues(int & val_1, int & val_2)
 {
-  uint8_t command_type = static_cast<uint8_t>('e');
-  std::vector<uint8_t> buffer = {command_type};
-  std::string response = sendMsg(buffer);
+  bool success;
+  std::string message;
+  if (serial_conn_.IsOpen()) {
+    uint8_t command_type = static_cast<uint8_t>(command_type::FEEDBACK);
+    std::vector<uint8_t> buffer = {command_type};
+    std::string response = sendMsg(buffer);
 
-  if (response.at(0) == 'e') {
-    int * return_vals_ptr = (int *)(response.c_str()) + 1;
-    val_1 = return_vals_ptr[0];
-    val_2 = return_vals_ptr[1];
+    if (response.at(0) == command_type::FEEDBACK) {
+      int * return_vals_ptr = (int *)(response.c_str()) + 1;
+      val_1 = return_vals_ptr[0];
+      val_2 = return_vals_ptr[1];
+      success = true;
+      message = "Successfully retrieved encoder values";
+      return std::pair<bool, std::string>(success, message);
+    } else {
+      success = false;
+      message = "Failed to retrieve encoder values";
+      return std::pair<bool, std::string>(success, message);
+    }
+  } else {
+    success = false;
+    message = "Serial Connection Closed";
+    return std::pair<bool, std::string>(success, message);
   }
 }
 
-void ArduinoComms::setMotorValues(int val_1, int val_2)
+std::pair<bool, std::string> ArduinoComms::setMotorValues(int val_1, int val_2)
 {
-  uint8_t command_type = static_cast<uint8_t>('p');
-  std::vector<uint8_t> buffer = {command_type, (uint8_t)val_1, (uint8_t)val_2};
-  sendMsg(buffer, false);
+  bool success;
+  std::string message;
+  if (serial_conn_.IsOpen()) {
+    uint8_t command_type = static_cast<uint8_t>(command_type::COMMAND);
+    std::vector<uint8_t> buffer = {command_type, (uint8_t)val_1, (uint8_t)val_2};
+    std::string response = sendMsg(buffer, false);
+    bool success;
+    std::string message;
+    if (response.at(0) == command_type::COMMAND) {
+      int * returned_values = (int *)response.c_str() + 1;
+      int val_1_returned, val_2_returned;
+      val_1_returned = returned_values[0];
+      val_2_returned = returned_values[1];
+      if ((val_1 == val_1_returned) && (val_2 == val_2_returned)) {
+        success = true;
+        message = "Successfully set motor commands";
+        return std::pair<bool, std::string>(success, message);
+      } else {
+        success = false;
+        std::stringstream message_stream;
+        message_stream << "Returned commands do not match: ";
+        message_stream << " val_1 : " << val_1_returned;
+        message_stream << " val_2 : " << val_2_returned << std::endl;
+        return std::pair<bool, std::string>(success, message.c_str());
+      };
+    } else {
+      success = false;
+      message = "Set Motor Speed command not aknowledged";
+      return std::pair<bool, std::string>(success, message);
+    };
+  } else {
+    success = false;
+    message = "Serial Connection Closed";
+    return std::pair<bool, std::string>(success, message);
+  };
 }
 
-void ArduinoComms::setPidValues(float k_p, float k_d, float k_i, float k_o)
+std::pair<bool, std::string> ArduinoComms::setPidValues(float k_p, float k_d, float k_i, float k_o)
 {
-  std::stringstream ss;
-  u_int8_t k_p1, k_p2, k_p3, k_p4;
-  k_p1 = 0x11000000 && k_p;
-  uint8_t command_type = static_cast<uint8_t>('p');
-  std::vector<uint8_t> buffer = {command_type};
+  bool success;
+  std::string message;
+  if (serial_conn_.IsOpen()) {
+    uint8_t command_type = static_cast<uint8_t>(command_type::GAINS);
+    std::vector<uint8_t> buffer = {command_type};
 
-  uint8_t * k_p_ptr = (uint8_t *)&k_p;
-  for (int i = 0; i < FLOAT_SIZE; i++) {
-    buffer.emplace_back(k_p_ptr[i]);
+    uint8_t * k_p_ptr = (uint8_t *)&k_p;
+    for (int i = 0; i < FLOAT_SIZE; i++) {
+      buffer.emplace_back(k_p_ptr[i]);
+    };
+
+    uint8_t * k_i_ptr = (uint8_t *)&k_i;
+    for (int i = 0; i < FLOAT_SIZE; i++) {
+      buffer.emplace_back(k_i_ptr[i]);
+    };
+
+    uint8_t * k_d_ptr = (uint8_t *)&k_d;
+    for (int i = 0; i < FLOAT_SIZE; i++) {
+      buffer.emplace_back(k_d_ptr[i]);
+    };
+
+    uint8_t * k_o_ptr = (uint8_t *)&k_o;
+    for (int i = 0; i < FLOAT_SIZE; i++) {
+      buffer.emplace_back(k_o_ptr[i]);
+    };
+
+    bool success;
+    std::string message;
+    std::string response = sendMsg(buffer, false);
+    if (response.at(0) == command_type::GAINS) {
+      float * returned_values = (float *)response.c_str() + 1;
+      float k_p_returned, k_i_returned, k_d_returned, k_o_returned;
+      k_p_returned = returned_values[0];
+      k_i_returned = returned_values[1];
+      k_d_returned = returned_values[2];
+      k_o_returned = returned_values[3];
+      if (
+        (k_p_returned == k_p) && (k_i_returned == k_i) && (k_d_returned == k_d) &&
+        (k_o_returned == k_o)) {
+        success = true;
+        message = "Successfully set gains";
+        return std::pair<bool, std::string>(success, message);
+      } else {
+        success = false;
+        std::stringstream message_stream;
+        message_stream << "Returned gains do not match: ";
+        message_stream << " k_p : " << k_p_returned;
+        message_stream << " k_i : " << k_i_returned;
+        message_stream << " k_d : " << k_d_returned;
+        message_stream << " k_o : " << k_o_returned << std::endl;
+        return std::pair<bool, std::string>(success, message.c_str());
+      };
+    } else {
+      success = false;
+      message = "Set Gains command not aknowledged";
+      return std::pair<bool, std::string>(success, message);
+    };
+  } else {
+    success = false;
+    message = "Serial Connection Closed";
+    return std::pair<bool, std::string>(success, message);
   };
-
-  uint8_t * k_i_ptr = (uint8_t *)&k_i;
-  for (int i = 0; i < FLOAT_SIZE; i++) {
-    buffer.emplace_back(k_i_ptr[i]);
-  };
-
-  uint8_t * k_d_ptr = (uint8_t *)&k_d;
-  for (int i = 0; i < FLOAT_SIZE; i++) {
-    buffer.emplace_back(k_d_ptr[i]);
-  };
-
-  uint8_t * k_o_ptr = (uint8_t *)&k_o;
-  for (int i = 0; i < FLOAT_SIZE; i++) {
-    buffer.emplace_back(k_o_ptr[i]);
-  };
-
-  sendMsg(buffer);
 }
 
 std::string ArduinoComms::sendMsg(const std::vector<uint8_t> & msg_to_send, bool print_output)

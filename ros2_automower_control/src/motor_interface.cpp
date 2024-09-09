@@ -38,61 +38,19 @@ hardware_interface::CallbackReturn MotorInterface::on_init(
 
   cfg_.left_wheel_name = info_.hardware_parameters["left_wheel_name"];
   cfg_.right_wheel_name = info_.hardware_parameters["right_wheel_name"];
-  cfg_.loop_rate = hardware_interface::stof(info_.hardware_parameters["loop_rate"]);
+  cfg_.loop_rate = std::stof(info_.hardware_parameters["loop_rate"]);
   cfg_.device = info_.hardware_parameters["device"];
-  cfg_.baud_rate = hardware_interface::stoi(info_.hardware_parameters["baud_rate"]);
-  cfg_.timeout_ms = hardware_interface::stoi(info_.hardware_parameters["timeout_ms"]);
+  cfg_.baud_rate = std::stoi(info_.hardware_parameters["baud_rate"]);
+  cfg_.timeout_ms = std::stoi(info_.hardware_parameters["timeout_ms"]);
+  cfg_.pid_p = std::stoi(info_.hardware_parameters["pid_p"]);
+  cfg_.pid_i = std::stoi(info_.hardware_parameters["pid_i"]);
+  cfg_.pid_d = std::stoi(info_.hardware_parameters["pid_d"]);
+  cfg_.pid_o = std::stoi(info_.hardware_parameters["pid_o"]);
   cfg_.enc_counts_per_rev =
-    hardware_interface::stoi(info_.hardware_parameters["enc_counts_per_rev"]);
+    std::stoi(info_.hardware_parameters["enc_counts_per_rev"]);
 
   wheel_l_.setup(cfg_.left_wheel_name, cfg_.enc_counts_per_rev);
   wheel_r_.setup(cfg_.right_wheel_name, cfg_.enc_counts_per_rev);
-
-  hw_positions_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  hw_velocities_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  hw_commands_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-
-  for (const hardware_interface::ComponentInfo & joint : info_.joints) {
-    // MotorInterface has exactly two states and one command interface on each joint
-    if (joint.command_interfaces.size() != 1) {
-      RCLCPP_FATAL(
-        rclcpp::get_logger("MotorInterface"),
-        "Joint '%s' has %zu command interfaces found. 1 expected.", joint.name.c_str(),
-        joint.command_interfaces.size());
-      return hardware_interface::CallbackReturn::ERROR;
-    }
-
-    if (joint.command_interfaces[0].name != hardware_interface::HW_IF_VELOCITY) {
-      RCLCPP_FATAL(
-        rclcpp::get_logger("MotorInterface"),
-        "Joint '%s' have %s command interfaces found. '%s' expected.", joint.name.c_str(),
-        joint.command_interfaces[0].name.c_str(), hardware_interface::HW_IF_VELOCITY);
-      return hardware_interface::CallbackReturn::ERROR;
-    }
-
-    if (joint.state_interfaces.size() != 2) {
-      RCLCPP_FATAL(
-        rclcpp::get_logger("MotorInterface"), "Joint '%s' has %zu state interface. 2 expected.",
-        joint.name.c_str(), joint.state_interfaces.size());
-      return hardware_interface::CallbackReturn::ERROR;
-    }
-
-    if (joint.state_interfaces[0].name != hardware_interface::HW_IF_POSITION) {
-      RCLCPP_FATAL(
-        rclcpp::get_logger("MotorInterface"),
-        "Joint '%s' have '%s' as first state interface. '%s' expected.", joint.name.c_str(),
-        joint.state_interfaces[0].name.c_str(), hardware_interface::HW_IF_POSITION);
-      return hardware_interface::CallbackReturn::ERROR;
-    }
-
-    if (joint.state_interfaces[1].name != hardware_interface::HW_IF_VELOCITY) {
-      RCLCPP_FATAL(
-        rclcpp::get_logger("MotorInterface"),
-        "Joint '%s' have '%s' as second state interface. '%s' expected.", joint.name.c_str(),
-        joint.state_interfaces[1].name.c_str(), hardware_interface::HW_IF_VELOCITY);
-      return hardware_interface::CallbackReturn::ERROR;
-    }
-  }
 
   return hardware_interface::CallbackReturn::SUCCESS;
 }
@@ -104,12 +62,12 @@ std::vector<hardware_interface::StateInterface> MotorInterface::export_state_int
   state_interfaces.emplace_back(hardware_interface::StateInterface(
     wheel_l_.name, hardware_interface::HW_IF_POSITION, &wheel_l_.pos));
   state_interfaces.emplace_back(hardware_interface::StateInterface(
-    wheel_l_.name, hardware_interface::HW_IF_VELOCITY, wheel_l_.vel));
+    wheel_l_.name, hardware_interface::HW_IF_VELOCITY, &wheel_l_.vel));
 
   state_interfaces.emplace_back(hardware_interface::StateInterface(
     wheel_r_.name, hardware_interface::HW_IF_POSITION, &wheel_r_.pos));
   state_interfaces.emplace_back(hardware_interface::StateInterface(
-    wheel_r_.name, hardware_interface::HW_IF_VELOCITY, wheel_r_.vel));
+    wheel_r_.name, hardware_interface::HW_IF_VELOCITY, &wheel_r_.vel));
 
   return state_interfaces;
 }
@@ -134,10 +92,32 @@ hardware_interface::CallbackReturn MotorInterface::on_activate(
   RCLCPP_INFO(rclcpp::get_logger("MotorInterface"), "Activating ...please wait...");
 
   comms_.setup(cfg_.device, cfg_.baud_rate, cfg_.timeout_ms);
+  std::pair<bool, std::string> response = comms_.setPidValues(cfg_.pid_p, cfg_.pid_d, cfg_.pid_i, cfg_.pid_o);
+  if (response.first == true) {
+    RCLCPP_INFO(rclcpp::get_logger("MotorInterface"), "Successfully activated!");
 
-  RCLCPP_INFO(rclcpp::get_logger("MotorInterface"), "Successfully activated!");
+    return hardware_interface::CallbackReturn::SUCCESS;
+  } else {
+    RCLCPP_ERROR(rclcpp::get_logger("MotorInterface"), response.second);
+    return hardware_interface::CallbackReturn::ERROR;
+  }
+}
 
-  return hardware_interface::CallbackReturn::SUCCESS;
+hardware_interface::CallbackReturn MotorInterface::on_configure(
+  const rclcpp_lifecycle::State & /*previous_state*/)
+{
+  RCLCPP_INFO(rclcpp::get_logger("MotorInterface"), "Configuring ...please wait...");
+
+  comms_.setup(cfg_.device, cfg_.baud_rate, cfg_.timeout_ms);
+  std::pair<bool, std::string> response = comms_.setPidValues(cfg_.pid_p, cfg_.pid_d, cfg_.pid_i, cfg_.pid_o);
+  if (response.first == true) {
+    RCLCPP_INFO(rclcpp::get_logger("MotorInterface"), "Successfully configured!");
+
+    return hardware_interface::CallbackReturn::SUCCESS;
+  } else {
+    RCLCPP_ERROR(rclcpp::get_logger("MotorInterface"), response.second);
+    return hardware_interface::CallbackReturn::ERROR;
+  }
 }
 
 hardware_interface::CallbackReturn MotorInterface::on_deactivate(
@@ -156,9 +136,9 @@ hardware_interface::CallbackReturn MotorInterface::on_deactivate(
 hardware_interface::return_type MotorInterface::read(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & period)
 {
-  //TODO check connection and wraparound
-  comms_.readEncoderValues(wheel_l_.enc, wheel_r_.enc);
-
+  
+  std::pair<bool, std::string>response = comms_.readEncoderValues(wheel_l_.enc, wheel_r_.enc);
+  if (response.first == true){
   double delta_seconds = period.seconds();
 
   float pos_prev = wheel_l_.pos;
@@ -170,6 +150,10 @@ hardware_interface::return_type MotorInterface::read(
   wheel_r_.vel = (wheel_r_.pos - pos_prev) / delta_seconds;
 
   return hardware_interface::return_type::OK;
+  } else {
+    RCLCPP_ERROR(rclcpp::get_logger("MotorInterface"), response.second);
+    return hardware_interface::return_type::ERROR;
+  };
 }
 
 hardware_interface::return_type ros2_automower_control::MotorInterface::write(
@@ -179,10 +163,15 @@ hardware_interface::return_type ros2_automower_control::MotorInterface::write(
 
   int motor_l_counts_per_loop = wheel_l_.cmd / wheel_l_.rads_per_count / cfg_.loop_rate;
   int motor_r_counts_per_loop = wheel_r_.cmd / wheel_r_.rads_per_count / cfg_.loop_rate;
-  comms_.setMotorValues(motor_l_counts_per_loop, motor_r_counts_per_loop);
+  std::pair<bool, std::string>response = comms_.setMotorValues(motor_l_counts_per_loop, motor_r_counts_per_loop);
+  if (response.first == true){
   RCLCPP_INFO(rclcpp::get_logger("MotorInterface"), "Joints successfully written!");
 
   return hardware_interface::return_type::OK;
+  } else {
+    RCLCPP_ERROR(rclcpp::get_logger("MotorInterface"), response.second);
+    return hardware_interface::return_type::ERROR;
+  };
 }
 
 }  // namespace ros2_automower_control

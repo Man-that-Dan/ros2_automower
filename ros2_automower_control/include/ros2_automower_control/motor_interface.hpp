@@ -26,13 +26,16 @@ class MotorInterface : public hardware_interface::SystemInterface
   {
     std::string left_wheel_name = "";
     std::string right_wheel_name = "";
-    float loop_rate - 0.0;
+    float loop_rate = 0.0;
     std::string device = "";
     int baud_rate = 0;
     int timeout_ms = 0;
     int enc_counts_per_rev = 0;
-
-  }
+    float pid_p = 0.0;
+    float pid_i = 0.0;
+    float pid_d = 0.0;
+    float pid_o = 0.0;
+  } cfg_;
 
   public : RCLCPP_SHARED_PTR_DEFINITIONS(MotorInterface);
 
@@ -44,6 +47,9 @@ class MotorInterface : public hardware_interface::SystemInterface
   std::vector<hardware_interface::CommandInterface> export_command_interfaces() override;
 
   hardware_interface::CallbackReturn on_activate(
+    const rclcpp_lifecycle::State & previous_state) override;
+  
+  hardware_interface::CallbackReturn on_configure(
     const rclcpp_lifecycle::State & previous_state) override;
 
   hardware_interface::CallbackReturn on_deactivate(
