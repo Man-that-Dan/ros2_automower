@@ -1,0 +1,2 @@
+bool active
+float32 rads_per_second

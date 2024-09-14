@@ -32,9 +32,13 @@ if(BUILD_TESTING)
   #set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
-
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/blade_status.msg"
+  "srv/blade_command.srv"
+ )
 target_link_libraries(ros2_automower_control PUBLIC serial)
 
+ros2_
 install(
   DIRECTORY config launch
   DESTINATION share/${PROJECT_NAME}

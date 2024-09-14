@@ -3,6 +3,7 @@
 
     <xacro:include filename="robot_core.xacro" />
 
-    <xacro:include filename="gazebo_control.xacro"/>
-    
+    <xacro:include filename="$(find ros2_automower_control)/ros2_control/ros2_automower.ros2_control.xacro" />
+
+    <xacro:ros2_automower_ros2_control name="ros2_automower" prefix="$(arg prefix)"/>
 </robot>
