@@ -15,9 +15,12 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-
 # find dependencies
+
 find_package(ament_cmake REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+
+
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -33,10 +36,10 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/blade_status.msg"
-  "srv/blade_command.srv"
+  "msg/BladeStatus.msg"
+  "srv/BladeCommand.srv"
  )
-target_link_libraries(ros2_automower_control PUBLIC serial)
+#target_link_libraries(ros2_automower_control PUBLIC serial)
 
 ros2_
 install(

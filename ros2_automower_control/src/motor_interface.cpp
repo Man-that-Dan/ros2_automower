@@ -48,7 +48,6 @@ hardware_interface::CallbackReturn MotorInterface::on_init(
   cfg_.pid_o = std::stoi(info_.hardware_parameters["pid_o"]);
   cfg_.enc_counts_per_rev =
     std::stoi(info_.hardware_parameters["enc_counts_per_rev"]);
-
   wheel_l_.setup(cfg_.left_wheel_name, cfg_.enc_counts_per_rev);
   wheel_r_.setup(cfg_.right_wheel_name, cfg_.enc_counts_per_rev);
 

@@ -64,6 +64,71 @@ std::pair<bool, std::string> ArduinoComms::readEncoderValues(int & val_1, int & 
   }
 }
 
+std::pair<bool, std::string> ArduinoComms::readBladeEncoderValue(int & val)
+{
+  bool success;
+  std::string message;
+  if (serial_conn_.IsOpen()) {
+    uint8_t command_type = static_cast<uint8_t>(command_type::FEEDBACK);
+    std::vector<uint8_t> buffer = {command_type};
+    std::string response = sendMsg(buffer);
+
+    if (response.at(0) == command_type::FEEDBACK) {
+      int * return_vals_ptr = (int *)(response.c_str()) + 1;
+      val = return_vals_ptr[0];
+      success = true;
+      message = "Successfully retrieved blade encoder value";
+      return std::pair<bool, std::string>(success, message);
+    } else {
+      success = false;
+      message = "Failed to retrieve blade encoder value";
+      return std::pair<bool, std::string>(success, message);
+    }
+  } else {
+    success = false;
+    message = "Serial Connection Closed";
+    return std::pair<bool, std::string>(success, message);
+  }
+}
+
+std::pair<bool, std::string> ArduinoComms::setBladeMotorValue(int val)
+{
+  bool success;
+  std::string message;
+  if (serial_conn_.IsOpen()) {
+    uint8_t command_type = static_cast<uint8_t>(command_type::COMMAND);
+    std::vector<uint8_t> buffer = {command_type, (uint8_t)val};
+    std::string response = sendMsg(buffer, false);
+    bool success;
+    std::string message;
+    if (response.at(0) == command_type::COMMAND) {
+      int * returned_values = (int *)response.c_str() + 1;
+      int val_returned;
+      val_returned = returned_values[0];
+      if (val == val_returned) {
+        success = true;
+        message = "Successfully set blade motor command";
+        return std::pair<bool, std::string>(success, message);
+      } else {
+        success = false;
+        std::stringstream message_stream;
+        message_stream << "Returned blade command does not match: ";
+        message_stream << " val : " << val_returned;
+        message_stream << std::endl;
+        return std::pair<bool, std::string>(success, message.c_str());
+      };
+    } else {
+      success = false;
+      message = "Set Blade Motor Speed command not aknowledged";
+      return std::pair<bool, std::string>(success, message);
+    };
+  } else {
+    success = false;
+    message = "Serial Connection Closed";
+    return std::pair<bool, std::string>(success, message);
+  };
+}
+
 std::pair<bool, std::string> ArduinoComms::setMotorValues(int val_1, int val_2)
 {
   bool success;
