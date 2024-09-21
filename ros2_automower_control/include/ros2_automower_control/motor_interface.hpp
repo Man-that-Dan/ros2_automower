@@ -37,7 +37,8 @@ class MotorInterface : public hardware_interface::SystemInterface
     float pid_o = 0.0;
   } cfg_;
 
-  public : RCLCPP_SHARED_PTR_DEFINITIONS(MotorInterface);
+public:
+  RCLCPP_SHARED_PTR_DEFINITIONS(MotorInterface);
 
   hardware_interface::CallbackReturn on_init(
     const hardware_interface::HardwareInfo & info) override;
@@ -48,7 +49,7 @@ class MotorInterface : public hardware_interface::SystemInterface
 
   hardware_interface::CallbackReturn on_activate(
     const rclcpp_lifecycle::State & previous_state) override;
-  
+
   hardware_interface::CallbackReturn on_configure(
     const rclcpp_lifecycle::State & previous_state) override;
 

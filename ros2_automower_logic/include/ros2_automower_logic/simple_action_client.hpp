@@ -1,3 +1,7 @@
+#ifndef ROS2_AUTOMOWER_LOGIC__SIMPLE_ACTION_CLIENT_HPP
+#define ROS2_AUTOMOWER_LOGIC__SIMPLE_ACTION_CLIENT_HPP
+
+
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_action/create_client.hpp"
 #include "rclcpp_action/rclcpp_action.hpp"
@@ -8,8 +12,7 @@ class SimpleActionClient : public rclcpp::Node
 public:
   using GoalHandleT = rclcpp_action::ClientGoalHandle<T>;
 
-  explicit SimpleActionClient(
-    std::string name, std::string action_name, int buffer_size)
+  explicit SimpleActionClient(std::string name, std::string action_name, int buffer_size)
   : Node(name)
   {
     this->client_ptr_ = rclcpp_action::create_client<T>(this, action_name);
@@ -45,8 +48,8 @@ public:
       std::bind(&SimpleActionClient::feedback_callback, this, _1, _2);
     send_goal_options.result_callback = std::bind(&SimpleActionClient::result_callback, this, _1);
     this->client_ptr_->async_send_goal(goal_msg, send_goal_options);
-    while(!(this->goal_response_received)){
-        rclcpp::spin(this);
+    while (!(this->goal_response_received)) {
+      rclcpp::spin(this);
     }
     return this->goal_accepted;
   }
@@ -108,6 +111,7 @@ public:
         return;
     }
   }
+
 private:
   rclcpp_action::Client<T>::SharedPtr client_ptr_;
   rclcpp::TimerBase::SharedPtr timer_;
@@ -128,6 +132,6 @@ private:
     this->buffer_current_index += 1;
     this->buffer_current_index = this->buffer_current_index % this->buffer_size;
   };
-
-  
 };
+
+#endif // !ROS2_AUTOMOWER_LOGIC__SIMPLE_ACTION_CLIENT_HPP

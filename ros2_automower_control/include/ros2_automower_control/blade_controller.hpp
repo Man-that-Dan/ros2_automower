@@ -10,7 +10,7 @@ namespace ros2_automower_control
 {
 class BladeController : public rclcpp::Node
 {
-struct Config
+  struct Config
   {
     std::string blade_name = "";
     float loop_rate = 0.0;
@@ -27,8 +27,8 @@ struct Config
 public:
   BladeController() : Node("BladeController") {}
   void BladeController::setBladeCommand(
-        const std::shared_ptr<ros2_automower_control::srv::BladeCommand::Request> request,
-        std::shared_ptr<ros2_automower_control::srv::BladeCommand::Response> response);
+    const std::shared_ptr<ros2_automower_control::srv::BladeCommand::Request> request,
+    std::shared_ptr<ros2_automower_control::srv::BladeCommand::Response> response);
   void sendBladeCommand();
 
   void publishBladeStatus();

@@ -46,8 +46,7 @@ hardware_interface::CallbackReturn MotorInterface::on_init(
   cfg_.pid_i = std::stoi(info_.hardware_parameters["pid_i"]);
   cfg_.pid_d = std::stoi(info_.hardware_parameters["pid_d"]);
   cfg_.pid_o = std::stoi(info_.hardware_parameters["pid_o"]);
-  cfg_.enc_counts_per_rev =
-    std::stoi(info_.hardware_parameters["enc_counts_per_rev"]);
+  cfg_.enc_counts_per_rev = std::stoi(info_.hardware_parameters["enc_counts_per_rev"]);
   wheel_l_.setup(cfg_.left_wheel_name, cfg_.enc_counts_per_rev);
   wheel_r_.setup(cfg_.right_wheel_name, cfg_.enc_counts_per_rev);
 
@@ -91,7 +90,8 @@ hardware_interface::CallbackReturn MotorInterface::on_activate(
   RCLCPP_INFO(rclcpp::get_logger("MotorInterface"), "Activating ...please wait...");
 
   comms_.setup(cfg_.device, cfg_.baud_rate, cfg_.timeout_ms);
-  std::pair<bool, std::string> response = comms_.setPidValues(cfg_.pid_p, cfg_.pid_d, cfg_.pid_i, cfg_.pid_o);
+  std::pair<bool, std::string> response =
+    comms_.setPidValues(cfg_.pid_p, cfg_.pid_d, cfg_.pid_i, cfg_.pid_o);
   if (response.first == true) {
     RCLCPP_INFO(rclcpp::get_logger("MotorInterface"), "Successfully activated!");
 
@@ -108,7 +108,8 @@ hardware_interface::CallbackReturn MotorInterface::on_configure(
   RCLCPP_INFO(rclcpp::get_logger("MotorInterface"), "Configuring ...please wait...");
 
   comms_.setup(cfg_.device, cfg_.baud_rate, cfg_.timeout_ms);
-  std::pair<bool, std::string> response = comms_.setPidValues(cfg_.pid_p, cfg_.pid_d, cfg_.pid_i, cfg_.pid_o);
+  std::pair<bool, std::string> response =
+    comms_.setPidValues(cfg_.pid_p, cfg_.pid_d, cfg_.pid_i, cfg_.pid_o);
   if (response.first == true) {
     RCLCPP_INFO(rclcpp::get_logger("MotorInterface"), "Successfully configured!");
 
@@ -122,7 +123,6 @@ hardware_interface::CallbackReturn MotorInterface::on_configure(
 hardware_interface::CallbackReturn MotorInterface::on_deactivate(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
-
   RCLCPP_INFO(rclcpp::get_logger("MotorInterface"), "Deactivating ...please wait...");
 
   comms_.disconnect();
@@ -135,20 +135,19 @@ hardware_interface::CallbackReturn MotorInterface::on_deactivate(
 hardware_interface::return_type MotorInterface::read(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & period)
 {
-  
-  std::pair<bool, std::string>response = comms_.readEncoderValues(wheel_l_.enc, wheel_r_.enc);
-  if (response.first == true){
-  double delta_seconds = period.seconds();
+  std::pair<bool, std::string> response = comms_.readEncoderValues(wheel_l_.enc, wheel_r_.enc);
+  if (response.first == true) {
+    double delta_seconds = period.seconds();
 
-  float pos_prev = wheel_l_.pos;
-  wheel_l_.pos = wheel_l_.calcEncAngle();
-  wheel_l_.vel = (wheel_l_.pos - pos_prev) / delta_seconds;
+    float pos_prev = wheel_l_.pos;
+    wheel_l_.pos = wheel_l_.calcEncAngle();
+    wheel_l_.vel = (wheel_l_.pos - pos_prev) / delta_seconds;
 
-  pos_prev = wheel_r_.pos;
-  wheel_r_.pos = wheel_r_.calcEncAngle();
-  wheel_r_.vel = (wheel_r_.pos - pos_prev) / delta_seconds;
+    pos_prev = wheel_r_.pos;
+    wheel_r_.pos = wheel_r_.calcEncAngle();
+    wheel_r_.vel = (wheel_r_.pos - pos_prev) / delta_seconds;
 
-  return hardware_interface::return_type::OK;
+    return hardware_interface::return_type::OK;
   } else {
     RCLCPP_ERROR(rclcpp::get_logger("MotorInterface"), response.second);
     return hardware_interface::return_type::ERROR;
@@ -162,11 +161,12 @@ hardware_interface::return_type ros2_automower_control::MotorInterface::write(
 
   int motor_l_counts_per_loop = wheel_l_.cmd / wheel_l_.rads_per_count / cfg_.loop_rate;
   int motor_r_counts_per_loop = wheel_r_.cmd / wheel_r_.rads_per_count / cfg_.loop_rate;
-  std::pair<bool, std::string>response = comms_.setMotorValues(motor_l_counts_per_loop, motor_r_counts_per_loop);
-  if (response.first == true){
-  RCLCPP_INFO(rclcpp::get_logger("MotorInterface"), "Joints successfully written!");
+  std::pair<bool, std::string> response =
+    comms_.setMotorValues(motor_l_counts_per_loop, motor_r_counts_per_loop);
+  if (response.first == true) {
+    RCLCPP_INFO(rclcpp::get_logger("MotorInterface"), "Joints successfully written!");
 
-  return hardware_interface::return_type::OK;
+    return hardware_interface::return_type::OK;
   } else {
     RCLCPP_ERROR(rclcpp::get_logger("MotorInterface"), response.second);
     return hardware_interface::return_type::ERROR;
