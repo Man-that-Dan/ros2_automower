@@ -5,6 +5,23 @@
 
 #include "tinyfsm.hpp"
 
+enum EventMappings
+{
+  StartMapEvent,
+  FinishMapEvent,
+  ReachedHomeEvent,
+  EmergencyStopEvent,
+  LowBatteryEvent,
+  FinishedMowEvent,
+  StartMowEvent,
+  StartTeleopEvent,
+  CancelEvent,
+  HomingEvent,
+  FinishChargeEvent,
+  StartBladeEvent,
+  StopBladeEvent,
+};
+
 struct StartMapEvent : tinyfsm::Event
 {
   std::pair<float, float> start_coordinates;
@@ -51,6 +68,14 @@ struct HomingEvent : tinyfsm::Event
 };
 
 struct FinishChargeEvent : tinyfsm::Event
+{
+};
+
+struct StartBladeEvent : tinyfsm::Event
+{
+};
+
+struct StopBladeEvent : tinyfsm::Event
 {
 };
 

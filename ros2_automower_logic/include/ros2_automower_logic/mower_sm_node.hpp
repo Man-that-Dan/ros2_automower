@@ -2,10 +2,12 @@
 #define ROS2_AUTOMOWER_LOGIC__MOWER_SM_NODE_HPP_
 
 #include "geometry_msgs/msg/point.hpp"
+#include "std_msgs/msg/int8.hpp"
 #include "mower_sm.hpp"
 #include "nav_msgs/msg/odometry.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include "std_srvs/srv/trigger.hpp"
+#include "ros2_automower_control/srv/blade_command.hpp"
 
 namespace ros2_automower_logic
 {
@@ -16,14 +18,25 @@ public:
 
 private:
   rclcpp::Service<std_srvs::srv::Trigger>::SharedPtr start_map_srv;
+  rclcpp::Service<std_srvs::srv::Trigger>::SharedPtr start_blade_srv;
+  rclcpp::Service<std_srvs::srv::Trigger>::SharedPtr stop_blade_srv;
   rclcpp::Service<std_srvs::srv::Trigger>::SharedPtr go_charge_srv;
   rclcpp::Service<std_srvs::srv::Trigger>::SharedPtr start_mow_srv;
   rclcpp::Service<std_srvs::srv::Trigger>::SharedPtr start_teleop_srv;
   rclcpp::Service<std_srvs::srv::Trigger>::SharedPtr cancel_srv;
   rclcpp::Service<std_srvs::srv::Trigger>::SharedPtr go_home_srv;
   rclcpp::Service<std_srvs::srv::Trigger>::SharedPtr e_stop_srv; // TODO need to rethink this. Need lower level controller to trigger estop
+  rclcpp::Client<ros2_automower_control::srv::BladeCommand>::SharedPtr blade_command_srv;
 
   void start_map_callback(
+    const std::shared_ptr<std_srvs::srv::Trigger::Request> request,
+    std::shared_ptr<std_srvs::srv::Trigger::Response> response);
+  
+  void start_blade_callback(
+    const std::shared_ptr<std_srvs::srv::Trigger::Request> request,
+    std::shared_ptr<std_srvs::srv::Trigger::Response> response);
+
+  void stop_blade_callback(
     const std::shared_ptr<std_srvs::srv::Trigger::Request> request,
     std::shared_ptr<std_srvs::srv::Trigger::Response> response);
 

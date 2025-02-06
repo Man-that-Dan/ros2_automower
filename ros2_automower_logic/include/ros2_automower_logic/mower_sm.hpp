@@ -33,6 +33,8 @@ public:
   virtual void entry(void){};
   virtual void exit(void){};
   void stopRobot();
+  void startBlade();
+  void stopBlade();
   std::pair<double, double> getHomeCoordinates() { return home_coordinates; };
   std::pair<double, double> getCurrentCoordinates() { return current_coordinates; };
   void setCurrentCoordinates(std::pair<double, double> coordinates)
@@ -66,6 +68,13 @@ class Idle : public MowerState
   };
   void react(HomingEvent const &) override {
     transit<Homing>();
+  };
+  void react(StartBladeEvent const &) override {
+    startBlade();
+  };
+
+  void react(StopBladeEvent const &) override {
+    stopBlade();
   };
 };
 
@@ -173,9 +182,18 @@ class Mowing : public MowerState
   void react(CancelEvent const &) override {
     transit<Idle>();
   };
+
+  void react(StartBladeEvent const &) override {
+    startBlade();
+  };
+
+  void react(StopBladeEvent const &) override {
+    stopBlade();
+  };
+  
   void exit() override { stopRobot(); };
   bool driveInReverse(std::pair<double, double> current_location, double distance);
-  void startBlade();
+  
   bool checkIfMowingPlan();
   bool createMowingPlan();
   void startMowing();

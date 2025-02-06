@@ -77,7 +77,8 @@ void MowerState::setNavigationTarget(std::pair<double, double> coordinates)
 };
 
 //TODO implement
-void Mapping::unsetCurrentMap(){};
+void Mapping::unsetCurrentMap(){
+};
 void Mapping::startMapper(){};
 void Mapping::stopMapper(){};
 void Homing::unsetCurrentNavigationCourse(){};
@@ -85,7 +86,66 @@ void Charging::startChargeMonitor(){};
 void Charging::stopChargeMonitor(){};
 void Charging::returnToPreHomingState(){};
 bool Mowing::driveInReverse(std::pair<double, double> current_location, double distance){};
-void Mowing::startBlade(){};
+void MowerState::startBlade(){
+  //TODO, correct service name
+  static auto blade_client =
+    state_machine_function_node->create_client<ros2_automower_control::srv::BladeCommand>("/blade_command");
+  while (!blade_client->wait_for_service(std::chrono::seconds(1))) {
+    if (!rclcpp::ok()) {
+      RCLCPP_ERROR(
+        state_machine_function_node->get_logger(), "Interruped while waiting for the server.");
+      return;
+    }
+    RCLCPP_INFO(
+      state_machine_function_node->get_logger(), "Server not available, waiting again...");
+  }
+  auto request = std::make_shared<ros2_automower_control::srv::BladeCommand::Request>();
+  request->rads_per_second = 10.0;
+  RCLCPP_INFO(state_machine_function_node->get_logger(), "Sending request");
+  auto future = blade_client->async_send_request(request);
+  auto status = future.wait_for(std::chrono::seconds(3));  //not spinning here!
+  if (status == std::future_status::ready) {
+    RCLCPP_INFO(
+      state_machine_function_node->get_logger(), "blade command srv response is %d",
+      future.get()->success);
+    bool success = future.get()->success;
+    if (!success) {
+      RCLCPP_ERROR(state_machine_function_node->get_logger(), "stop robot failed");
+    }
+  } else {
+    RCLCPP_ERROR(state_machine_function_node->get_logger(), "stop robot srv future wait failed");
+  }
+};
+
+void MowerState::stopBlade(){
+  static auto blade_client =
+    state_machine_function_node->create_client<ros2_automower_control::srv::BladeCommand>("/blade_command");
+  while (!blade_client->wait_for_service(std::chrono::seconds(1))) {
+    if (!rclcpp::ok()) {
+      RCLCPP_ERROR(
+        state_machine_function_node->get_logger(), "Interruped while waiting for the server.");
+      return;
+    }
+    RCLCPP_INFO(
+      state_machine_function_node->get_logger(), "Server not available, waiting again...");
+  }
+  auto request = std::make_shared<ros2_automower_control::srv::BladeCommand::Request>();
+  request->rads_per_second = 0.0;
+  RCLCPP_INFO(state_machine_function_node->get_logger(), "Sending request");
+  auto future = blade_client->async_send_request(request);
+  auto status = future.wait_for(std::chrono::seconds(3));  //not spinning here!
+  if (status == std::future_status::ready) {
+    RCLCPP_INFO(
+      state_machine_function_node->get_logger(), "blade command srv response is %d",
+      future.get()->success);
+    bool success = future.get()->success;
+    if (!success) {
+      RCLCPP_ERROR(state_machine_function_node->get_logger(), "stop robot failed");
+    }
+  } else {
+    RCLCPP_ERROR(state_machine_function_node->get_logger(), "stop robot srv future wait failed");
+  }
+};
 bool Mowing::checkIfMowingPlan(){};
 bool Mowing::createMowingPlan(){};
 void Mowing::startMowing(){};
@@ -98,6 +158,10 @@ namespace ros2_automower_logic {
       "/start_mow", std::bind(&MowerStateMachineNode::start_mow_callback, this, _1, _2));
     start_map_srv = this->create_service<std_srvs::srv::Trigger>(
       "/start_map", std::bind(&MowerStateMachineNode::start_map_callback, this, _1, _2));
+    start_blade_srv = this->create_service<std_srvs::srv::Trigger>(
+      "/start_blade", std::bind(&MowerStateMachineNode::start_blade_callback, this, _1, _2));
+    stop_blade_srv = this->create_service<std_srvs::srv::Trigger>(
+      "/stop_blade", std::bind(&MowerStateMachineNode::stop_blade_callback, this, _1, _2));
     start_teleop_srv = this->create_service<std_srvs::srv::Trigger>(
       "/start_teleop", std::bind(&MowerStateMachineNode::start_teleop_callback, this, _1, _2));
     go_home_srv = this->create_service<std_srvs::srv::Trigger>(
@@ -118,6 +182,20 @@ namespace ros2_automower_logic {
     const std::shared_ptr<std_srvs::srv::Trigger::Request> request,
     std::shared_ptr<std_srvs::srv::Trigger::Response> response){
       StartMapEvent event;
+      send_event(event);
+};
+
+void MowerStateMachineNode::start_blade_callback(
+    const std::shared_ptr<std_srvs::srv::Trigger::Request> request,
+    std::shared_ptr<std_srvs::srv::Trigger::Response> response){
+      StartBladeEvent event;
+      send_event(event);
+};
+
+void MowerStateMachineNode::stop_blade_callback(
+    const std::shared_ptr<std_srvs::srv::Trigger::Request> request,
+    std::shared_ptr<std_srvs::srv::Trigger::Response> response){
+      StopBladeEvent event;
       send_event(event);
 };
 

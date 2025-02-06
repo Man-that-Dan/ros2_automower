@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/opt/ros/foxy/include/",
+                "/opt/ros/foxy/include/hardware_interface/include",
+                "~/ros2_humble/install/ros2_automower_control/include/ros2_automower_control",
+                "~/ros2_humble/install/ros2_automower_logic/include/ros2_automower_logic"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang-10",
+            "cStandard": "c17",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-clang-x64"
+        }
+    ],
+    "version": 4
+}
