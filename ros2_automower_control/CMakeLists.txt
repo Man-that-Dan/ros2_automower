@@ -19,7 +19,47 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
+find_package(ament_cmake REQUIRED)
+find_package(serial REQUIRED)
+find_package(hardware_interface REQUIRED)
+find_package(controller_manager REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(rclcpp_lifecycle REQUIRED)
+find_package(pluginlib REQUIRED)
 
+
+
+add_library(ros2_automower_control SHARED src/motor_interface.cpp src/wheel.cpp src/arduino_comms.cpp)
+
+target_include_directories(
+  ros2_automower_control PUBLIC
+  include
+)
+
+
+
+ament_target_dependencies(
+  ros2_automower_control PUBLIC
+  hardware_interface
+  controller_manager
+  serial
+  rclcpp
+  rclcpp_lifecycle
+  pluginlib
+)
+
+target_link_libraries(ros2_automower_control PUBLIC serial)
+
+pluginlib_export_plugin_description_file(hardware_interface ros2_automower_control.xml)
+
+add_executable(blade_controller src/blade_controller.cpp src/arduino_comms.cpp src/wheel.cpp)
+target_include_directories(blade_controller PRIVATE include)
+ament_target_dependencies(blade_controller PUBLIC
+  serial
+  rclcpp
+  rclcpp_lifecycle
+  pluginlib
+)
 
 # uncomment the following section in order to fill in
 # further dependencies manually.
@@ -41,10 +81,34 @@ rosidl_generate_interfaces(${PROJECT_NAME}
  )
 #target_link_libraries(ros2_automower_control PUBLIC serial)
 
-ros2_
+
 install(
-  DIRECTORY config launch
+  DIRECTORY config launch ros2_control
   DESTINATION share/${PROJECT_NAME}
 )
 
+install(
+  DIRECTORY include/${PROJECT_NAME}
+  DESTINATION share/${PROJECT_NAME}
+)
+
+install(TARGETS ros2_automower_control
+  EXPORT export_ros2_automower_control
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin
+)
+
+install(TARGETS blade_controller
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+## EXPORTS
+ament_export_targets(export_ros2_automower_control HAS_LIBRARY_TARGET)
+ament_export_dependencies( 
+  hardware_interface
+  pluginlib
+  rclcpp
+  rclcpp_lifecycle
+  )
 ament_package()

@@ -2,8 +2,8 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>ros2_automower_control</name>
-  <version>0.0.0</version>
-  <description>Control Package for ROS 2 Auto Lawnmower</description>
+  <version>1.0.0</version>
+  <description>Control Package for ROS 2 Auto Lawnmower Specific to a configuration with three brushless motors with built in encoders ru by arduino microcontrollers</description>
   <maintainer email="dantoro1995@gmail.com">Daniel Toro</maintainer>
   <license>Apache-2.0</license>
 
@@ -20,7 +20,7 @@
   <depend>rclcpp_lifecycle</depend>
   <depend>rclpy</depend>
   <depend>ros2_control</depend>
-  <depend>libserial-dev</dev>
+  <depend>libserial-dev</depend>
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 

@@ -1,0 +1,9 @@
+<library path="ros2_automower_control">
+  <class name="ros2_automower_control/MotorInterface"
+         type="ros2_automower_control::MotorInterface"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      The ros2_control hardware interface for ros2 automower
+    </description>
+  </class>
+</library>
